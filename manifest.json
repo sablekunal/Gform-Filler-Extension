@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Gform Filler",
+  "version": "1.0",
+  "description": "Fills Google Forms using an AI agent context.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://docs.google.com/forms/*",
+    "http://localhost:5001/*",
+    "http://127.0.0.1:5001/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://docs.google.com/forms/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
