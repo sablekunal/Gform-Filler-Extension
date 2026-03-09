@@ -11,7 +11,8 @@
   "host_permissions": [
     "*://docs.google.com/forms/*",
     "http://localhost:5001/*",
-    "http://127.0.0.1:5001/*"
+    "http://127.0.0.1:5001/*",
+    "https://llamaproxy.actofjoy00.workers.dev/*"
   ],
   "action": {
     "default_popup": "popup.html"

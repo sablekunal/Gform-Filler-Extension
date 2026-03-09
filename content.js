@@ -30,8 +30,23 @@ const randomBotDelay = () => delay(Math.floor(Math.random() * (150 - 50 + 1)) + 
 function fillText(el, text) {
     el.focus();
     document.execCommand('insertText', false, text);
+    el.dispatchEvent(new Event('input', { bubbles: true }));
     el.dispatchEvent(new Event('change', { bubbles: true }));
     el.blur();
+}
+
+// Precise UI Observer for dynamic dropdown options
+function waitForDropdown() {
+    return new Promise((resolve) => {
+        const check = () => {
+            const opts = Array.from(document.querySelectorAll('div[role="option"]')).filter(opt => opt.offsetParent !== null);
+            if (opts.length > 0) resolve(opts);
+            else setTimeout(check, 50);
+        };
+        check();
+        // Fallback resolve after 1s to prevent infinite hang
+        setTimeout(() => resolve([]), 1000);
+    });
 }
 
 // Central safe click dispatcher fulfilling the strictly prohibited instruction 
@@ -185,12 +200,9 @@ async function fillForm(context) {
 
         if (listBox) {
             safeClick(listBox); // Trigger open dropdown
-            await delay(150); // Wait 150ms as per master prompt
-
-            // get visible options (in Google Forms they detach to the body when open)
-            dropdownOptionsNodes = Array.from(document.querySelectorAll('div[role="option"]')).filter(opt => opt.offsetParent !== null);
+            dropdownOptionsNodes = await waitForDropdown(); 
             extractedDropdownOptions = dropdownOptionsNodes.map(opt => (opt.getAttribute('data-value') || opt.innerText || '').trim());
-
+            
             safeClick(document.body); // strictly close it during LLM wait
             await delay(100);
         }
@@ -246,11 +258,8 @@ async function fillForm(context) {
             if (extractedDropdownOptions.length > 0 && listBox) {
                 for (let idx of aiResponse.indices) {
                     safeClick(listBox); // 1. Click the role="listbox"
-                    await delay(150);   // 2. Wait 150ms
-
-                    // 3. Query the entire document.body for the div[role="option"]
-                    const activeOptions = Array.from(document.querySelectorAll('div[role="option"]')).filter(opt => opt.offsetParent !== null);
-
+                    const activeOptions = await waitForDropdown(); // 2 & 3. Wait for options and query body
+                    
                     if (activeOptions[idx]) {
                         safeClick(activeOptions[idx]); // 4. Click it
                         answered = true;

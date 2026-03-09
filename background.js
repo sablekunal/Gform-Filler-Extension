@@ -32,11 +32,14 @@ Do not include any other text, markdown, or explanations.`;
     let attempts = 0;
     while (attempts < 2) {
         try {
-            const response = await fetch("http://localhost:5001/v1/chat/completions", {
+            const response = await fetch("https://llamaproxy.actofjoy00.workers.dev/v1/chat/completions", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer sk-cf-proxy-key"
+                },
                 body: JSON.stringify({
-                    model: "llama-3-70b",
+                    model: "llama-3.1-8b",
                     messages: [
                         { role: "system", content: systemPrompt },
                         { role: "user", content: userPrompt }
@@ -45,16 +48,18 @@ Do not include any other text, markdown, or explanations.`;
                 })
             });
 
+            if (!response.ok) {
+                const errText = await response.text();
+                console.error(`AI API Error (${response.status}):`, errText);
+                attempts++;
+                continue;
+            }
+
             const data = await response.json();
 
             if (data.choices && data.choices.length > 0) {
                 let reply = data.choices[0].message.content.trim();
                 reply = reply.replace(/```json/gi, "").replace(/```/g, "").replace(/\*\*/g, "").trim();
-
-                if (reply.includes("该ip请求") || reply.includes("aichatos")) {
-                    console.warn("AI Proxy Rate Limited");
-                    return { answer: null }; // Request strictly failed
-                }
 
                 const jsonMatch = reply.match(/\{[\s\S]*\}/);
                 if (jsonMatch) {
@@ -75,7 +80,7 @@ Do not include any other text, markdown, or explanations.`;
             console.error(`AI API Error (Attempt ${attempts + 1}):`, error);
         }
         attempts++;
-        if (attempts < 2) await new Promise(res => setTimeout(res, 1000));
+        if (attempts < 2) await new Promise(res => setTimeout(res, 1000)); 
     }
     return { answer: { skip: true } };
 }
