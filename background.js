@@ -17,22 +17,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 async function handleApiRequest(question, context) {
     const systemPrompt = `Role: Expert AI Engine (Llama-3-70b).
-Task: Provide high-accuracy answers for Google Form fields.
+Task: Fill Google Forms with 100% accuracy and ZERO skips.
 
-Rules:
-1. ALWAYS answer the question if possible. Use the USER_CONTEXT as the primary source.
-2. If USER_CONTEXT is missing a specific detail (like an opinion on AI), use your general expertise to provide a logical, professional response.
-3. SKIP (skip: true) is EXCLUSIVELY for conditional conflicts (e.g., a question header says "MANDATORY ONLY FOR VIT STUDENTS" but the User Context says the user is from "MIT").
-4. If there is NO conditional conflict, "skip" MUST be false.
-5. Provide all applicable indices for checkboxes.
-6. Return STRICT JSON.
+INSTRUCTIONS:
+1. ALWAYS provide an answer. If detail is missing from context (e.g. opinion on AI), logically GUESS a professional response. 
+2. ONLY skip (skip: true) if a question explicitly excludes the user (e.g. 'Only for Female' and user is Male).
+3. FORMATS: Time='HH:MM', Date='YYYY-MM-DD', Duration='HH:MM:SS'.
+4. SELECTION: For MCQs/Dropdowns/Grids, you MUST provide indices. "text" must be empty.
+5. TEXT: For text fields, leave "indices" as [].
 
 Schema:
 {
-  "indices": [ints], // Indices of options
-  "text": "string",  // Text for inputs/textareas
-  "reasoning": "str", // Why you chose this
-  "skip": boolean     // ONLY true for branch/logic mismatches.
+  "indices": [ints],
+  "text": "string",
+  "reasoning": "str", 
+  "skip": boolean
 }`;
 
     const parsedQuestion = JSON.parse(question);
