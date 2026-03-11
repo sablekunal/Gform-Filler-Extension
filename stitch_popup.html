@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gform Filler Ultra</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d9af2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101b22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(24, 41, 52, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(49, 83, 104, 0.5);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+        .neon-text {
+            background: linear-gradient(135deg, #0d9af2 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .charging-btn {
+            background: linear-gradient(90deg, #0d9af2 0%, #06b6d4 50%, #0d9af2 100%);
+            background-size: 200% auto;
+            box-shadow: 0 0 20px rgba(13, 154, 242, 0.4);
+        }
+        .pulse-dot {
+            box-shadow: 0 0 8px #22c55e;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-slate-100 flex items-center justify-center min-h-screen">
+<!-- Chrome Extension Popup Container (standard 400px width) -->
+<div class="relative w-[400px] overflow-hidden rounded-xl border border-primary/20 bg-background-dark shadow-2xl">
+<!-- Header -->
+<header class="flex items-center justify-between p-5 border-b border-primary/10">
+<div class="flex items-center gap-2">
+<div class="p-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">bolt</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight neon-text uppercase">Gform Filler Ultra</h1>
+</div>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="p-5 space-y-6">
+<!-- Reference Context Area -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="text-xs font-semibold uppercase tracking-wider text-slate-400">User Reference Context</label>
+<span class="text-[10px] text-primary/60 font-medium">AI ANALYZER READY</span>
+</div>
+<div class="relative group">
+<textarea class="glass-panel w-full min-h-[160px] rounded-xl p-4 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none" placeholder="Paste your source data, LinkedIn profile, or resume here. Our AI will automatically map fields to the current Google Form..."></textarea>
+<div class="absolute bottom-3 right-3 opacity-30 group-focus-within:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm">auto_fix_high</span>
+</div>
+</div>
+</div>
+<!-- Primary CTA -->
+<button class="charging-btn w-full py-4 rounded-xl flex items-center justify-center gap-3 text-white font-bold text-lg uppercase tracking-wider hover:brightness-110 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined animate-pulse">ev_station</span>
+                Start Perfect Fill
+            </button>
+<!-- Secondary Controls -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-panel p-3 rounded-lg flex items-center justify-between border-primary/5">
+<span class="text-xs font-medium text-slate-300">Clear Data</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="glass-panel p-3 rounded-lg flex items-center justify-between border-primary/5">
+<span class="text-xs font-medium text-slate-300">Manual Mode</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="px-5 py-4 bg-black/30 flex items-center justify-between border-t border-primary/5">
+<div class="flex items-center gap-2">
+<div class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500 pulse-dot"></span>
+</div>
+<span class="text-[11px] font-medium text-slate-400">AI Sync Status: <span class="text-green-400">Connected</span></span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] text-slate-500">v4.2.0</span>
+<span class="material-symbols-outlined text-slate-500 text-sm">verified_user</span>
+</div>
+</footer>
+<!-- Background subtle glow -->
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[80px] rounded-full pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+</div>
+</body></html>

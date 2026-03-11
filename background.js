@@ -22,7 +22,7 @@ Task: Fill Google Forms with 100% accuracy and ZERO skips.
 INSTRUCTIONS:
 1. ALWAYS provide an answer. If detail is missing from context (e.g. opinion on AI), logically GUESS a professional response. 
 2. ONLY skip (skip: true) if a question explicitly excludes the user (e.g. 'Only for Female' and user is Male).
-3. FORMATS: Time='HH:MM', Date='YYYY-MM-DD', Duration='HH:MM:SS'.
+3. FORMATS: Time='HH:MM', Date='DD-MM-YYYY', Duration='HH:MM:SS'.
 4. SELECTION: For MCQs/Dropdowns/Grids, you MUST provide indices. "text" must be empty.
 5. TEXT: For text fields, leave "indices" as [].
 

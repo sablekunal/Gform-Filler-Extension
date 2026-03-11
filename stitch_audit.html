@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Trail Ultra - Side Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d9af2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101b22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(16, 27, 34, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(13, 154, 242, 0.2);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(13, 154, 242, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 font-display flex justify-end p-6 min-h-screen items-start">
+<!-- Audit Trail Floating Panel -->
+<div class="glass-panel w-full max-w-md rounded-xl flex flex-col h-[calc(100vh-3rem)] sticky top-6 overflow-hidden border border-slate-700/50">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 py-5 border-b border-slate-700/50 bg-slate-800/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">search_check</span>
+<h2 class="text-slate-100 text-lg font-bold tracking-tight">Audit Trail Ultra</h2>
+</div>
+<button class="flex items-center justify-center rounded-full w-8 h-8 bg-slate-800/50 hover:bg-slate-700/50 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</header>
+<!-- Stats/Tabs Bar -->
+<div class="px-6 pt-4">
+<div class="flex bg-slate-900/40 p-1 rounded-lg border border-slate-700/30">
+<button class="flex-1 py-1.5 px-3 rounded-md text-xs font-semibold bg-primary text-white shadow-sm">All Logs</button>
+<button class="flex-1 py-1.5 px-3 rounded-md text-xs font-semibold text-slate-400 hover:text-slate-200 transition-colors">Synced</button>
+<button class="flex-1 py-1.5 px-3 rounded-md text-xs font-semibold text-slate-400 hover:text-slate-200 transition-colors">Failed</button>
+</div>
+</div>
+<!-- Logs Section -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4">
+<!-- Log Row: Synced -->
+<div class="group bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 rounded-lg p-4 transition-all duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-slate-100 font-semibold text-sm truncate max-w-[220px]">Full Legal Name</h3>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.2)]">Synced</span>
+</div>
+<div class="space-y-1.5">
+<p class="text-slate-300 text-xs leading-relaxed font-medium">"Johnathan Quincy Doe"</p>
+<div class="flex items-start gap-1.5 text-slate-500 italic text-[11px]">
+<span class="material-symbols-outlined text-[14px] mt-0.5">auto_awesome</span>
+<p>AI: Matched with verified profile data from LinkedIn export.</p>
+</div>
+</div>
+</div>
+<!-- Log Row: Synced -->
+<div class="group bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 rounded-lg p-4 transition-all duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-slate-100 font-semibold text-sm truncate max-w-[220px]">Email Address</h3>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.2)]">Synced</span>
+</div>
+<div class="space-y-1.5">
+<p class="text-slate-300 text-xs leading-relaxed font-medium">"j.doe@innovation-labs.com"</p>
+<div class="flex items-start gap-1.5 text-slate-500 italic text-[11px]">
+<span class="material-symbols-outlined text-[14px] mt-0.5">auto_awesome</span>
+<p>AI: Validated professional domain connectivity and MX records.</p>
+</div>
+</div>
+</div>
+<!-- Log Row: Failed -->
+<div class="group bg-rose-500/5 hover:bg-rose-500/10 border border-rose-500/40 rounded-lg p-4 transition-all duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-slate-100 font-semibold text-sm truncate max-w-[220px]">Years of Experience</h3>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-500 text-white shadow-[0_0_12px_rgba(244,63,94,0.4)]">Failed</span>
+</div>
+<div class="space-y-1.5">
+<p class="text-rose-200 text-xs leading-relaxed font-medium">"Not found in dataset"</p>
+<div class="flex items-start gap-1.5 text-rose-400/70 italic text-[11px]">
+<span class="material-symbols-outlined text-[14px] mt-0.5">warning</span>
+<p>AI: Required field was empty and no relevant history found in resume.</p>
+</div>
+</div>
+</div>
+<!-- Log Row: Skipped -->
+<div class="group bg-slate-800/20 hover:bg-slate-800/40 border border-slate-700/20 rounded-lg p-4 transition-all duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-slate-400 font-semibold text-sm truncate max-w-[220px]">Referral Source</h3>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-700 text-slate-400 border border-slate-600">Skipped</span>
+</div>
+<div class="space-y-1.5">
+<p class="text-slate-500 text-xs leading-relaxed font-medium italic">Empty field</p>
+<div class="flex items-start gap-1.5 text-slate-600 italic text-[11px]">
+<span class="material-symbols-outlined text-[14px] mt-0.5">info</span>
+<p>AI: Marked as optional. User specified to skip marketing questions.</p>
+</div>
+</div>
+</div>
+<!-- Log Row: Synced -->
+<div class="group bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700/30 rounded-lg p-4 transition-all duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-slate-100 font-semibold text-sm truncate max-w-[220px]">Portfolio Link</h3>
+<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-[0_0_8px_rgba(16,185,129,0.2)]">Synced</span>
+</div>
+<div class="space-y-1.5">
+<p class="text-slate-300 text-xs leading-relaxed font-medium">"https://behance.net/jdoe-design"</p>
+<div class="flex items-start gap-1.5 text-slate-500 italic text-[11px]">
+<span class="material-symbols-outlined text-[14px] mt-0.5">auto_awesome</span>
+<p>AI: Extracted from 'Social' category in local vault.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<footer class="p-6 border-t border-slate-700/50 bg-slate-800/20">
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-xl">send</span>
+                    Submit Form
+                </button>
+<div class="flex items-center justify-between px-1">
+<p class="text-slate-500 text-[10px] font-medium uppercase tracking-widest">Version 2.4.0-Pro</p>
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<p class="text-slate-400 text-[10px] font-bold">LIVE SYNC ACTIVE</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
